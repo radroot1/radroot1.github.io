@@ -107,7 +107,11 @@ document.addEventListener("DOMNodeInserted", function () {
   if ( isnew > 0 ){
   	  //If it is a new line, do a character count of the line and add it to the running tally.
 	  var i=lines-1
-  	  var newline = document.getElementsByTagName('p')[i].innerHTML;
+	  var newEl = document.getElementsByTagName('p')[i];
+	  var newline = newEl.innerHTML;
+	  if(newline.indexOf('. ') === -1){
+		newEl.innerHTML = newline + '. '
+	  }
   	  var linechars = newline.length;
   	  newchars = chars + linechars;
   	  
