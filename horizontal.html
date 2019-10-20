@@ -58,35 +58,24 @@ body {
 <script>
 
 $(document).ready(function(){
-let oldlines = 0;
-let chars = 0;
+let countOld = 0;
+let charsOld = 0;
 document.addEventListener("DOMNodeInserted", function () {
-  let lines = document.getElementsByTagName('p').length;
-  let isNew = lines - oldlines;
-  if ( isNew > 0 ){
-	  let i=lines-1;
+  let countNew = document.getElementsByTagName('p').length;
+  if ( (countNew - countOld) > 0 ){
+	  let i=countNew-1;
 	  let newEl = document.getElementsByTagName('p')[i];
 	  let newline = newEl.innerHTML;
 	  if(newline.indexOf('. ') === -1){
 		newEl.innerHTML = newline + '. '
 	  }
   	  let lineChars = newline.length;
-  	  let newChars = chars + lineChars;
+  	  let newChars = charsOld + lineChars;
 	  let charsDisp = newChars.toLocaleString();
-	  let linesDisp = lines.toLocaleString();
+	  let linesDisp = countNew.toLocaleString();
 	  $('#counter').text(charsDisp+' / '+linesDisp);
-	  oldlines = lines;
-	  chars = newChars;
-  	  let LEEWAY = 200;
-
-  	  let b = document.body;
-  	  let offset = b.scrollHeight - b.offsetHeight;
-  	  let scrollPos = (b.scrollTop+offset);
-  	  let scrollBottom = (b.scrollHeight - (b.clientHeight+offset));
-  	  if (scrollPos >= scrollBottom - LEEWAY) {
- 	     window.scrollTo(0,document.body.scrollHeight);
- 	  }
-  
+	  countOld = countNew;
+	  charsOld = newChars;
   }
   
 }, false);
@@ -97,13 +86,13 @@ document.getElementById("remove_button").addEventListener("click", function() {
 		let last = document.getElementsByTagName('p')[q].innerHTML;
   	    let lastlen = last.length;
 		$('body').children('p:last').remove();
-   	    let newch = chars - lastlen;
+   	    let newch = charsOld - lastlen;
    	    let newchdisp = newch.toLocaleString();
- 		let newl = oldlines - 1;
+ 		let newl = countOld - 1;
  		let newldisp = newl.toLocaleString();
 		$('#counter').text(newchdisp+' / '+newldisp);
-		chars = newch;
-		oldlines = newl;
+		charsOld = newch;
+		countOld = newl;
 	}
 });
 });
