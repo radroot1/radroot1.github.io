@@ -1,4 +1,4 @@
-import $ from "./jquery-2.2.2.min.js" ;
+const $ = window.jQuery;
 $(document).ready(function () {
     let mCount = 0;
     let mCharsLength = 0;
@@ -7,7 +7,19 @@ $(document).ready(function () {
 
     function setCount(c){mCount = c;}
     function setCharLength(c){mCharsLength = c;}
-    document.addEventListener("DOMNodeInserted", function () {
+    function doListen(b){
+        if(b){
+            pContainer.addEventListener("DOMNodeInserted", listener, false);
+        } else{
+            pContainer.removeEventListener("DOMNodeInserted", listener, false);
+        }
+    }
+    function doWithoutListen(callback){
+        doListen(false);
+        setTimeout(callback, 0);
+        doListen(true);
+    }
+    const listener = function () {
         const elements = Array.from(pContainer.getElementsByTagName('p'));
         const countNew = elements.length;
         if ((countNew - mCount) > 0) {
@@ -17,13 +29,16 @@ $(document).ready(function () {
             if (newline.indexOf('. ') === -1) {
                 newEl.innerHTML = newline + '. '
             }
-            elements.unshift(newEl);
-            elements.pop();
-            pContainer.innerHTML = "";
-            elements.forEach((el, i)=>{
-                pContainer.appendChild(el);
-            });
-
+            if(countNew > 1){
+                doWithoutListen(()=>{
+                    pContainer.innerHTML = "";
+                    elements.unshift(newEl);
+                    elements.pop();
+                    elements.forEach((el, i)=>{
+                        pContainer.appendChild(el);
+                    });
+                });
+            }
             let charsLengthNew = mCharsLength + newline.length;
             let charsDisp = charsLengthNew.toLocaleString();
             let linesDisp = countNew.toLocaleString();
@@ -31,7 +46,8 @@ $(document).ready(function () {
             setCount(countNew);
             setCharLength(charsLengthNew);
         }
-    }, false);
+    };
+    doListen(true);
     document.getElementById("remove_button").addEventListener("click", function () {
         const pContainer = document.getElementsByTagName('p');
         let remove_lines = pContainer.length;
