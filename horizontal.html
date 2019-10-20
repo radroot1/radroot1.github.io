@@ -62,21 +62,21 @@ let oldlines = 0;
 let chars = 0;
 document.addEventListener("DOMNodeInserted", function () {
   let lines = document.getElementsByTagName('p').length;
-  let isnew = lines - oldlines;
-  if ( isnew > 0 ){
-	  let i=lines-1
+  let isNew = lines - oldlines;
+  if ( isNew > 0 ){
+	  let i=lines-1;
 	  let newEl = document.getElementsByTagName('p')[i];
 	  let newline = newEl.innerHTML;
 	  if(newline.indexOf('. ') === -1){
 		newEl.innerHTML = newline + '. '
 	  }
-  	  let linechars = newline.length;
-  	  newchars = chars + linechars;
-	  let charsdisp = newchars.toLocaleString();
-	  let linesdisp = lines.toLocaleString();
-	  jQuery('#counter').text(charsdisp+' / '+linesdisp);
+  	  let lineChars = newline.length;
+  	  let newChars = chars + lineChars;
+	  let charsDisp = newChars.toLocaleString();
+	  let linesDisp = lines.toLocaleString();
+	  $('#counter').text(charsDisp+' / '+linesDisp);
 	  oldlines = lines;
-	  chars = newchars;
+	  chars = newChars;
   	  let LEEWAY = 200;
 
   	  let b = document.body;
@@ -101,7 +101,7 @@ document.getElementById("remove_button").addEventListener("click", function() {
    	    let newchdisp = newch.toLocaleString();
  		let newl = oldlines - 1;
  		let newldisp = newl.toLocaleString();
-		jQuery('#counter').text(newchdisp+' / '+newldisp);
+		$('#counter').text(newchdisp+' / '+newldisp);
 		chars = newch;
 		oldlines = newl;
 	}
