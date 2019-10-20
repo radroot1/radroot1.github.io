@@ -72,6 +72,8 @@
                 if (newline.indexOf('. ') === -1) {
                     newEl.innerHTML = newline + '. '
                 }
+                pContainer.unshift(newEl);
+                pContainer.pop();
 
                 let charsLengthNew = mCharsLength + newline.length;
                 let charsDisp = charsLengthNew.toLocaleString();
