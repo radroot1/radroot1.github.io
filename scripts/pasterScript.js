@@ -3,8 +3,7 @@ $(document).ready(function () {
     let mCount = 0;
     let mCharsLength = 0;
     const pContainer = document.getElementById("elements");
-
-
+    const pCounter = document.getElementById("counter");
     function setCount(c){mCount = c;}
     function setCharLength(c){mCharsLength = c;}
     function doListen(b){
@@ -20,29 +19,23 @@ $(document).ready(function () {
         doListen(true);
     }
     const listener = function () {
-        const elements = Array.from(pContainer.getElementsByTagName('p'));
+        const elements = pContainer.getElementsByTagName('p');
         const countNew = elements.length;
         if ((countNew - mCount) > 0) {
             const newEl = elements[countNew - 1];
-
             const newline = newEl.innerHTML;
             if (newline.indexOf('. ') === -1) {
                 newEl.innerHTML = newline + '. '
             }
             if(countNew > 1){
                 doWithoutListen(()=>{
-                    pContainer.innerHTML = "";
-                    elements.unshift(newEl);
-                    elements.pop();
-                    elements.forEach((el, i)=>{
-                        pContainer.appendChild(el);
-                    });
+                    pContainer.insertBefore(newEl, elements[0]);
                 });
             }
             let charsLengthNew = mCharsLength + newline.length;
             let charsDisp = charsLengthNew.toLocaleString();
             let linesDisp = countNew.toLocaleString();
-            $('#counter').text(charsDisp + ' / ' + linesDisp);
+            pCounter.innerHTML = charsDisp + ' / ' + linesDisp;
             setCount(countNew);
             setCharLength(charsLengthNew);
         }
@@ -55,12 +48,12 @@ $(document).ready(function () {
             let q = remove_lines - 1;
             let last = pContainer[q].innerHTML;
             let lastlen = last.length;
-            $('body').children('p:last').remove();
+            document.body.querySelector('p:last-child').remove();
             let newch = mCharsLength - lastlen;
             let newchdisp = newch.toLocaleString();
             let newl = mCount - 1;
             let newldisp = newl.toLocaleString();
-            $('#counter').text(newchdisp + ' / ' + newldisp);
+            pCounter.innerHTML = newchdisp + ' / ' + newldisp;
             setCharLength(newch);
             setCount(newl);
         }
