@@ -57,41 +57,45 @@
 <script>
 
     $(document).ready(function () {
-        let countOld = 0;
-        let charsOld = 0;
+        let mCount = 0;
+        let mCharsLength = 0;
+
+        function setCount(c){mCount = c;}
+        function setCharLength(c){mCharsLength = c;}
         document.addEventListener("DOMNodeInserted", function () {
-            let countNew = document.getElementsByTagName('p').length;
-            if ((countNew - countOld) > 0) {
-                let i = countNew - 1;
-                let newEl = document.getElementsByTagName('p')[i];
-                let newline = newEl.innerHTML;
+            const pContainer = document.getElementsByTagName('p');
+            const countNew = pContainer.length;
+            if ((countNew - mCount) > 0) {
+                const newEl = pContainer[countNew - 1];
+
+                const newline = newEl.innerHTML;
                 if (newline.indexOf('. ') === -1) {
                     newEl.innerHTML = newline + '. '
                 }
-                let lineChars = newline.length;
-                let newChars = charsOld + lineChars;
-                let charsDisp = newChars.toLocaleString();
+
+                let charsLengthNew = mCharsLength + newline.length;
+                let charsDisp = charsLengthNew.toLocaleString();
                 let linesDisp = countNew.toLocaleString();
                 $('#counter').text(charsDisp + ' / ' + linesDisp);
-                countOld = countNew;
-                charsOld = newChars;
+                setCount(countNew);
+                setCharLength(charsLengthNew);
             }
-
         }, false);
         document.getElementById("remove_button").addEventListener("click", function () {
-            let remove_lines = document.getElementsByTagName('p').length;
+            const pContainer = document.getElementsByTagName('p');
+            let remove_lines = pContainer.length;
             if (remove_lines > 0) {
                 let q = remove_lines - 1;
-                let last = document.getElementsByTagName('p')[q].innerHTML;
+                let last = pContainer[q].innerHTML;
                 let lastlen = last.length;
                 $('body').children('p:last').remove();
-                let newch = charsOld - lastlen;
+                let newch = mCharsLength - lastlen;
                 let newchdisp = newch.toLocaleString();
-                let newl = countOld - 1;
+                let newl = mCount - 1;
                 let newldisp = newl.toLocaleString();
                 $('#counter').text(newchdisp + ' / ' + newldisp);
-                charsOld = newch;
-                countOld = newl;
+                setCharLength(newch);
+                setCount(newl);
             }
         });
     });
