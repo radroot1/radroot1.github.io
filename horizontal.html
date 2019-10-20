@@ -1,4 +1,5 @@
-<html>
+<script src="./scripts/pasterScript.js" type="es6"></script>
+<html lang="en">
 <head>
     <title>Texthooker</title>
     <style type="text/css">
@@ -51,54 +52,6 @@
     <div id="remove_button" title="Remove last line">x</div>
     <div id="counter" title="No. of characters / No. of lines">0 / 0</div>
 </div>
-
-<script>
-    import $ from "./jquery-2.2.2.min.js" ;
-    $(document).ready(function () {
-        let mCount = 0;
-        let mCharsLength = 0;
-
-        function setCount(c){mCount = c;}
-        function setCharLength(c){mCharsLength = c;}
-        document.addEventListener("DOMNodeInserted", function () {
-            const pContainer = document.getElementsByTagName('p');
-            const countNew = pContainer.length;
-            if ((countNew - mCount) > 0) {
-                const newEl = pContainer[countNew - 1];
-
-                const newline = newEl.innerHTML;
-                if (newline.indexOf('. ') === -1) {
-                    newEl.innerHTML = newline + '. '
-                }
-                pContainer.unshift(newEl);
-                pContainer.pop();
-
-                let charsLengthNew = mCharsLength + newline.length;
-                let charsDisp = charsLengthNew.toLocaleString();
-                let linesDisp = countNew.toLocaleString();
-                $('#counter').text(charsDisp + ' / ' + linesDisp);
-                setCount(countNew);
-                setCharLength(charsLengthNew);
-            }
-        }, false);
-        document.getElementById("remove_button").addEventListener("click", function () {
-            const pContainer = document.getElementsByTagName('p');
-            let remove_lines = pContainer.length;
-            if (remove_lines > 0) {
-                let q = remove_lines - 1;
-                let last = pContainer[q].innerHTML;
-                let lastlen = last.length;
-                $('body').children('p:last').remove();
-                let newch = mCharsLength - lastlen;
-                let newchdisp = newch.toLocaleString();
-                let newl = mCount - 1;
-                let newldisp = newl.toLocaleString();
-                $('#counter').text(newchdisp + ' / ' + newldisp);
-                setCharLength(newch);
-                setCount(newl);
-            }
-        });
-    });
-</script>
+<div id="elements" ></div>
 </body>
 </html>
