@@ -1,101 +1,100 @@
 <html>
 <head>
-<title>Texthooker</title>
-<style type="text/css">
+    <title>Texthooker</title>
+    <style type="text/css">
 
-body {
-	background-color: #202020;
-	color: #BCBCBC;
-}
+        body {
+            background-color: #202020;
+            color: #BCBCBC;
+        }
 
-.container {
-	position:fixed;
-	top:3px;
-	right:5px;
-	display:inline-block;
-}
+        .container {
+            position: fixed;
+            top: 3px;
+            right: 5px;
+            display: inline-block;
+        }
 
-#counter {
-	background-color:rgba(25,25,25,0.8);
-	color:#9d9d9d;
-	font-size:.4em;
-	line-height:100%;
-	float:left;
-	padding-left:8px;
-	padding-right:8px;
-	padding-top:5px;
-	padding-bottom:5px;
-}
+        #counter {
+            background-color: rgba(25, 25, 25, 0.8);
+            color: #9d9d9d;
+            font-size: .4em;
+            line-height: 100%;
+            float: left;
+            padding-left: 8px;
+            padding-right: 8px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
 
-#remove_button {
-	background-color:rgba(25,25,25,0.8);
-	color:#9d9d9d;
-	font-size:.4em;
-	line-height:100%;
-	float:right;
-	margin-right:10px;
-	padding-left:8px;
-	padding-right:8px;
-	padding-top:5px;
-	padding-bottom:5px;
-	cursor:pointer;
-	cursor:hand;
-}
+        #remove_button {
+            background-color: rgba(25, 25, 25, 0.8);
+            color: #9d9d9d;
+            font-size: .4em;
+            line-height: 100%;
+            float: right;
+            margin-right: 10px;
+            padding-left: 8px;
+            padding-right: 8px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            cursor: pointer;
+            cursor: hand;
+        }
 
-</style>
+    </style>
 </head>
 <body>
 
 
-
 <div class="container">
-	<div id="remove_button" title="Remove last line">x</div>
-	<div id="counter" title="No. of characters / No. of lines">0 / 0</div>
+    <div id="remove_button" title="Remove last line">x</div>
+    <div id="counter" title="No. of characters / No. of lines">0 / 0</div>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 
 <script>
 
-$(document).ready(function(){
-let countOld = 0;
-let charsOld = 0;
-document.addEventListener("DOMNodeInserted", function () {
-  let countNew = document.getElementsByTagName('p').length;
-  if ( (countNew - countOld) > 0 ){
-	  let i=countNew-1;
-	  let newEl = document.getElementsByTagName('p')[i];
-	  let newline = newEl.innerHTML;
-	  if(newline.indexOf('. ') === -1){
-		newEl.innerHTML = newline + '. '
-	  }
-  	  let lineChars = newline.length;
-  	  let newChars = charsOld + lineChars;
-	  let charsDisp = newChars.toLocaleString();
-	  let linesDisp = countNew.toLocaleString();
-	  $('#counter').text(charsDisp+' / '+linesDisp);
-	  countOld = countNew;
-	  charsOld = newChars;
-  }
-  
-}, false);
-document.getElementById("remove_button").addEventListener("click", function() {
-	let remove_lines = document.getElementsByTagName('p').length;
-	if ( remove_lines > 0 ){
-		let q = remove_lines - 1;
-		let last = document.getElementsByTagName('p')[q].innerHTML;
-  	    let lastlen = last.length;
-		$('body').children('p:last').remove();
-   	    let newch = charsOld - lastlen;
-   	    let newchdisp = newch.toLocaleString();
- 		let newl = countOld - 1;
- 		let newldisp = newl.toLocaleString();
-		$('#counter').text(newchdisp+' / '+newldisp);
-		charsOld = newch;
-		countOld = newl;
-	}
-});
-});
+    $(document).ready(function () {
+        let countOld = 0;
+        let charsOld = 0;
+        document.addEventListener("DOMNodeInserted", function () {
+            let countNew = document.getElementsByTagName('p').length;
+            if ((countNew - countOld) > 0) {
+                let i = countNew - 1;
+                let newEl = document.getElementsByTagName('p')[i];
+                let newline = newEl.innerHTML;
+                if (newline.indexOf('. ') === -1) {
+                    newEl.innerHTML = newline + '. '
+                }
+                let lineChars = newline.length;
+                let newChars = charsOld + lineChars;
+                let charsDisp = newChars.toLocaleString();
+                let linesDisp = countNew.toLocaleString();
+                $('#counter').text(charsDisp + ' / ' + linesDisp);
+                countOld = countNew;
+                charsOld = newChars;
+            }
+
+        }, false);
+        document.getElementById("remove_button").addEventListener("click", function () {
+            let remove_lines = document.getElementsByTagName('p').length;
+            if (remove_lines > 0) {
+                let q = remove_lines - 1;
+                let last = document.getElementsByTagName('p')[q].innerHTML;
+                let lastlen = last.length;
+                $('body').children('p:last').remove();
+                let newch = charsOld - lastlen;
+                let newchdisp = newch.toLocaleString();
+                let newl = countOld - 1;
+                let newldisp = newl.toLocaleString();
+                $('#counter').text(newchdisp + ' / ' + newldisp);
+                charsOld = newch;
+                countOld = newl;
+            }
+        });
+    });
 </script>
 </body>
 </html>
