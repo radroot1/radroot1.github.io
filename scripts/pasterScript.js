@@ -1,5 +1,4 @@
-const $ = window.jQuery;
-$(document).ready(function () {
+window.onload = function () {
     let mCount = 0;
     let mCharsLength = 0;
     const pContainer = document.getElementById("elements");
@@ -58,4 +57,4 @@ $(document).ready(function () {
             setCount(newl);
         }
     });
-});
+};
