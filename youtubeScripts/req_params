@@ -1,0 +1,25 @@
+:authority: www.youtube.com
+:method: POST
+:path: /youtubei/v1/browse/edit_playlist?key=AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8
+:scheme: https
+accept: */*
+accept-encoding: gzip, deflate, br
+accept-language: en-ZA,en-GB;q=0.9,en-US;q=0.8,en;q=0.7
+authorization: SAPISIDHASH 1587819967_e32375e5b7f123294341e3e01ad4ed2878ba74ba
+content-length: 875
+content-type: application/json
+cookie: CONSENT=YES+RU.ru+20160717-08-0; VISITOR_INFO1_LIVE=OCrFLsigbyc; YSC=oiHgk4VSJuQ; wide=1; HSID=AWCPHoEK3EbndWLgb; SSID=Ap4a-PfLhHoXoDwY1; APISID=zvvfxKhscqIuYeCo/A_Y2iET0CwjGrXahQ; SAPISID=RDXcUeV1NUjTkAh-/A7DQoQMJgfiGhsWNL; __Secure-HSID=AWCPHoEK3EbndWLgb; __Secure-SSID=Ap4a-PfLhHoXoDwY1; __Secure-APISID=zvvfxKhscqIuYeCo/A_Y2iET0CwjGrXahQ; __Secure-3PAPISID=RDXcUeV1NUjTkAh-/A7DQoQMJgfiGhsWNL; s_gl=1d69aac621b2f9c0a25dade722d6e24bcwIAAABVUw==; LOGIN_INFO=AFmmF2swRgIhAM_7VSzHGRY7Hlm1l2a990BYevmY7YdmWHsd_o5Zigb_AiEAsSF1sxqE0-P9h-ZUNBBHJGyqiNdGCJZGqxFA-qhjD68:QUQ3MjNmd1hfbU5aTnZPbVdTWXA3TzdqWlZ2T0JlQ253cy1EZ2VsUzl4WlZ3UWhTZzlLT0FoNFFCNjdYMndCSUtmcXN1ajBjb040NlV0eEh5VTFqYzc1UktxbGpZYi1ITXJBQ2lKUDE4QWxONVNCbzhLWjhkcWpmQS1waWdiWXVEQnZGYXhXZUJEWEJ1QjByU040VXFuemhzTEhCaDY3RlFUZWNnRkNjaHpqTzdzaUg5LUZoX0J3; SID=uweVI7aUbv6PyZWJ1naT5qZm8w67LN-GNbCk9THzTXgfjOLstyaRjvxGWimldtUte7fHXQ.; __Secure-3PSID=uweVI7aUbv6PyZWJ1naT5qZm8w67LN-GNbCk9THzTXgfjOLsuHzGvMPP5NVPzAWbKtghTg.; PREF=f4=4000000&f6=400&cvdm=grid&hl=en&al=ru&gl=US; SIDCC=AJi4QfE1AgOXCHuj6suo_RJhpl2cABRUvXahg5BoN0yedv1f2ssd5AX9uUgejf8hHQApi0aTO9k2
+origin: https://www.youtube.com
+referer: https://www.youtube.com/playlist?list=WL
+sec-fetch-dest: empty
+sec-fetch-mode: cors
+sec-fetch-site: same-origin
+user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36
+x-client-data: CJC2yQEIprbJAQjEtskBCKmdygEIsqDKAQjQr8oBCLywygEI7bXKAQiOusoBCJnHygEYvLrKAQ==
+x-requested-with: XMLHttpRequest
+
+key: AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8
+
+
+SAPISIDHASH 1587823910_6d525124193ab9b396f099a49d3f1b50ec85dd38 should
+SAPISIDHASH 1587823910_da28a95ca35a839c0f292435d8d89f132974d8ee was

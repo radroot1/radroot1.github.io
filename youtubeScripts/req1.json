@@ -1,0 +1,38 @@
+{
+  "context": {
+    "client": {
+      "hl": "en",
+      "gl": "US",
+      "visitorData": "CgtPQ3JGTHNpZ2J5Yyjd1ZD1BQ%3D%3D",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36,gzip(gfe)",
+      "clientName": "WEB",
+      "clientVersion": "2.20200424.06.00",
+      "osName": "Windows",
+      "osVersion": "10.0",
+      "browserName": "Chrome",
+      "browserVersion": "81.0.4044.122",
+      "screenWidthPoints": 1412,
+      "screenHeightPoints": 1321,
+      "screenPixelDensity": 2,
+      "utcOffsetMinutes": 240,
+      "userInterfaceTheme": "USER_INTERFACE_THEME_DARK"
+    },
+    "request": {
+      "sessionId": "6803040335262498537",
+      "internalExperimentFlags": [],
+      "consistencyTokenJars": []
+    },
+    "user": {},
+    "clientScreenNonce": "3SqkXtKeIpeK7QS77IiIBg",
+    "clickTracking": {
+      "clickTrackingParams": "IhMIgf7Wp9KD6QIVTcFPCB0HWwwE"
+    }
+  },
+  "actions": [
+    {
+      "addedVideoId": "FukJelV3-Yk",
+      "action": "ACTION_ADD_VIDEO"
+    }
+  ],
+  "playlistId": "PLhToONtKITIVY2kN0A2f4gSCDwihaNizb"
+}
