@@ -20,7 +20,7 @@ window.onload = function () {
     const listener = function () {
         const elements = pContainer.getElementsByTagName('p');
         const countNew = elements.length;
-        if ((countNew - mCount) > 0) {
+        if (countNew - mCount > 0) {
             const newEl = elements[countNew - 1];
             const newline = newEl.innerHTML;
             if (newline.indexOf('. ') === -1) {
@@ -46,11 +46,9 @@ window.onload = function () {
         if (remove_lines > 0) {
             const node = document.getElementById("elements");
             node.innerHTML = '';
-            let newch = 0;
-            let newl = mCount - 1;
-            pCounter.innerHTML = newch.toLocaleString() + ' / ' + newl.toLocaleString();
-            setCharLength(newch);
-            setCount(newl);
+            pCounter.innerHTML = '0 / 0';
+            setCharLength(0);
+            setCount(0);
         }
     });
 };
