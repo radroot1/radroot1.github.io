@@ -44,15 +44,11 @@ window.onload = function () {
         const pContainer = document.getElementsByTagName('p');
         let remove_lines = pContainer.length;
         if (remove_lines > 0) {
-            let q = remove_lines - 1;
-            let last = pContainer[q].innerHTML;
-            let lastlen = last.length;
-            document.body.querySelector('p:last-child').remove();
-            let newch = mCharsLength - lastlen;
-            let newchdisp = newch.toLocaleString();
+            const node = document.getElementById("elements");
+            node.innerHTML = '';
+            let newch = 0;
             let newl = mCount - 1;
-            let newldisp = newl.toLocaleString();
-            pCounter.innerHTML = newchdisp + ' / ' + newldisp;
+            pCounter.innerHTML = newch.toLocaleString() + ' / ' + newl.toLocaleString();
             setCharLength(newch);
             setCount(newl);
         }
