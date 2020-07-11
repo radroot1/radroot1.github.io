@@ -3,8 +3,11 @@ window.onload = function () {
     let mCharsLength = 0;
     const pContainer = document.getElementById("elements");
     const pCounter = document.getElementById("counter");
-    function setCount(c){mCount = c;}
-    function setCharLength(c){mCharsLength = c;}
+    function setCount(count, charLength){
+        mCount = count;
+        mCharsLength = charLength;
+        pCounter.innerHTML = count.toLocaleString() + ' / ' + charLength.toLocaleString();
+    }
     function doListen(b){
         if(b){
             pContainer.addEventListener("DOMNodeInserted", listener, false);
@@ -32,11 +35,7 @@ window.onload = function () {
                 });
             }
             let charsLengthNew = mCharsLength + newline.length;
-            let charsDisp = charsLengthNew.toLocaleString();
-            let linesDisp = countNew.toLocaleString();
-            pCounter.innerHTML = charsDisp + ' / ' + linesDisp;
-            setCount(countNew);
-            setCharLength(charsLengthNew);
+            setCount(countNew, charsLengthNew);
         }
     };
     doListen(true);
@@ -46,9 +45,7 @@ window.onload = function () {
         if (remove_lines > 0) {
             const node = document.getElementById("elements");
             node.innerHTML = '';
-            pCounter.innerHTML = '0 / 0';
-            setCharLength(0);
-            setCount(0);
+            setCount(0, 0);
         }
     });
 };
