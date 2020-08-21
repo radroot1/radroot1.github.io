@@ -1,12 +1,12 @@
 window.onload = function () {
     let mCount = 0;
-    let mCharsLength = 0;
     const pContainer = document.getElementById("elements");
     const pCounter = document.getElementById("counter");
-    function setCount(count, charLength){
-        mCount = count;
-        mCharsLength = charLength;
+    function setCount(){
+        let count = pContainer.getElementsByTagName('p').length;
+        let charLength = pContainer.innerHTML.length;
         pCounter.innerHTML = count.toLocaleString() + ' / ' + charLength.toLocaleString();
+        mCount = count;
     }
     function doListen(b){
         if(b){
@@ -34,18 +34,17 @@ window.onload = function () {
                     pContainer.insertBefore(newEl, elements[0]);
                 });
             }
-            let charsLengthNew = mCharsLength + newline.length;
-            setCount(countNew, charsLengthNew);
+            setCount();
         }
     };
     doListen(true);
     document.getElementById("remove_button").addEventListener("click", function () {
-        const pContainer = document.getElementsByTagName('p');
-        let remove_lines = pContainer.length;
-        if (remove_lines > 0) {
-            const node = document.getElementById("elements");
-            node.innerHTML = '';
-            setCount(0, 0);
+        const elements = pContainer.getElementsByTagName('p');
+        if (elements.length > 0) {
+            let last = elements[elements.length - 1];
+            pContainer.innerHTML = '';
+            pContainer.insertBefore(last, elements[0]);
+            setCount();
         }
     });
 };
