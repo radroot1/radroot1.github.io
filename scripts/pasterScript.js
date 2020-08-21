@@ -41,9 +41,9 @@ window.onload = function () {
     document.getElementById("remove_button").addEventListener("click", function () {
         const elements = pContainer.getElementsByTagName('p');
         if (elements.length > 0) {
-            let last = elements[elements.length - 1];
+            const first = elements[0];
             pContainer.innerHTML = '';
-            pContainer.insertBefore(last, elements[0]);
+            pContainer.insertBefore(first, null);
             setCount();
         }
     });
