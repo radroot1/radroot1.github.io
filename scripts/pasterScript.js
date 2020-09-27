@@ -1,4 +1,4 @@
-window.onload = function () {
+window.onload = async function () {
     let mCount = 0;
     const pContainer = document.getElementById("elements");
     const pCounter = document.getElementById("counter");
@@ -47,4 +47,6 @@ window.onload = function () {
             setCount();
         }
     });
+    const text = await navigator.clipboard.readText();
+    pContainer.innerHTML = `<p>${text}</p>`;
 };
