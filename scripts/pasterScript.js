@@ -38,7 +38,7 @@ window.onload = async function () {
                 if (newEl.innerHTML.indexOf('。') === -1) {
                     newEl.innerHTML = newEl.innerHTML + '。';
                 }
-                moveToTop(newEl);
+                moveToTop(newEl, newEl.parentNode);
                 setCount();
             }
         })
