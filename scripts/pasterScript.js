@@ -8,10 +8,18 @@ window.onload = async function () {
         pCounter.innerHTML = count.toLocaleString() + ' / ' + charLength.toLocaleString();
         mCount = count;
     }
-    function wrapInDiv(el) {
-        const wrapper = document.createElement('div');
+    function wrapIn(el) {
+        const wrapper = document.createElement('p');
+        if(typeof el == "string"){
+            wrapper.textContent = el;
+        } else{
+            wrapper.appendChild(el);
+        }
+        return wrapper;
+    }
+    function wrapInAndAppendToTop(el) {
+        const wrapper = wrapIn(el);
         moveToTop(wrapper, el.parentNode);
-        wrapper.appendChild(el);
         return wrapper;
     }
     function moveToTop(el, parent) {
@@ -43,6 +51,11 @@ window.onload = async function () {
             }
         })
     }
+    async function pasteClip() {
+        const text = await navigator.clipboard.readText();
+        pContainer.appendChild(wrapIn(text))
+    }
+
     doListenForClipChanges(true);
     document.getElementById("remove_button").addEventListener("click", function () {
         const elements = pContainer.childNodes;
@@ -53,6 +66,5 @@ window.onload = async function () {
             setCount();
         }
     });
-    const text = await navigator.clipboard.readText();
-    pContainer.innerHTML = `<p>${text}</p>`;
+    setTimeout(pasteClip, 0);
 };
