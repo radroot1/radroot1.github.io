@@ -1,6 +1,6 @@
 {
     "version": 0,
-    "date": "2021-09-08 04:00:42",
+    "date": "2021-12-13 23:10:32",
     "url": "chrome-extension://ogmnaimimemjmbakcfefmnahgdfhfami/",
     "manifest": {
         "author": "Alex Yatskov",
@@ -74,12 +74,25 @@
                     "http://*/*",
                     "https://*/*",
                     "file://*/*"
-                ]
+                ],
+                "run_at": "document_idle"
+            },
+            {
+                "all_frames": true,
+                "js": [
+                    "js/document-start.js"
+                ],
+                "match_about_blank": true,
+                "matches": [
+                    "http://docs.google.com/*",
+                    "https://docs.google.com/*"
+                ],
+                "run_at": "document_start"
             }
         ],
         "content_security_policy": "default-src 'self'; img-src blob: 'self'; style-src 'self' 'unsafe-inline'; media-src *; connect-src *",
         "description": "Japanese dictionary with Anki integration",
-        "differential_fingerprint": "1.79a91f19990f2dac12816378e8c1fdc9e26910919bf1bc5609250b9679310091",
+        "differential_fingerprint": "1.81539742aef125232f43c4b827236a74c1149c73868fd07ee78ffe5f1731c320",
         "icons": {
             "16": "images/icon16.png",
             "19": "images/icon19.png",
@@ -116,7 +129,7 @@
             ]
         },
         "update_url": "https://clients2.google.com/service/update2/crx",
-        "version": "21.7.31.2",
+        "version": "21.10.31.1",
         "web_accessible_resources": [
             "popup.html",
             "template-renderer.html"
@@ -128,14 +141,16 @@
             "os": "win"
         }
     },
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36",
     "permissions": {
         "origins": [
             "<all_urls>",
             "chrome://favicon/*",
             "file:///*",
             "http://*/*",
-            "https://*/*"
+            "http://docs.google.com/*",
+            "https://*/*",
+            "https://docs.google.com/*"
         ],
         "permissions": [
             "clipboardRead",
@@ -148,14 +163,14 @@
         ]
     },
     "options": {
-        "version": 13,
+        "version": 15,
         "profiles": [
             {
                 "name": "Default",
                 "conditionGroups": [],
                 "options": {
                     "general": {
-                        "enable": true,
+                        "enable": false,
                         "resultOutputMode": "split",
                         "debugInfo": false,
                         "maxResults": 32,
@@ -192,7 +207,9 @@
                         "popupActionBarVisibility": "auto",
                         "popupActionBarLocation": "top",
                         "frequencyDisplayMode": "split-tags-grouped",
-                        "termDisplayMode": "ruby"
+                        "termDisplayMode": "ruby",
+                        "sortFrequencyDictionary": null,
+                        "sortFrequencyDictionaryOrder": "descending"
                     },
                     "audio": {
                         "enabled": false,
@@ -284,16 +301,16 @@
                     "dictionaries": [
                         {
                             "name": "JMdict (English)",
-                            "priority": 0,
+                            "priority": 1,
                             "enabled": true,
                             "allowSecondarySearches": false,
                             "definitionsCollapsible": "not-collapsible"
                         },
                         {
                             "name": "JMdict (Russian)",
-                            "priority": 0,
+                            "priority": 2,
                             "enabled": true,
-                            "allowSecondarySearches": false,
+                            "allowSecondarySearches": true,
                             "definitionsCollapsible": "not-collapsible"
                         },
                         {
@@ -349,27 +366,26 @@
                                 "key_word": "{expression}",
                                 "read1": "{sentence}",
                                 "read2": "",
-                                "empty_flip": "{reading}, {glossary-brief}",
-                                "write1": "{expression}",
-                                "write2": "",
+                                "def": "{reading}, {glossary-brief}",
                                 "mean1": "",
+                                "sym_legacy": "",
                                 "notes": "",
                                 "read3": "",
                                 "read4": "",
                                 "read5": "",
                                 "read.empty": "",
-                                "write3": "",
-                                "write4": ""
+                                "sym1": "",
+                                "sym2": ""
                             }
                         },
                         "kanji": {
-                            "deck": "#jap::kanji_a",
+                            "deck": "#jap::kanji.a",
                             "model": "jap.kanji",
                             "fields": {
                                 "sym": "{character}",
                                 "read": "{sentence-furigana}",
                                 "note": "{glossary}",
-                                "keyword": "",
+                                "rating": "",
                                 "components": "",
                                 "example": "{sentence}"
                             }
@@ -691,6 +707,9 @@
                         "enableSearchPageMonitor": false,
                         "autoSearchContent": true,
                         "maximumSearchLength": 1000
+                    },
+                    "accessibility": {
+                        "forceGoogleDocsHtmlRendering": false
                     }
                 }
             }
