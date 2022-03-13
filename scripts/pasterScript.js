@@ -59,10 +59,13 @@ window.onload = async function () {
     doListenForClipChanges(true);
     document.getElementById("remove_button").addEventListener("click", function () {
         const elements = pContainer.childNodes;
-        if (elements.length > 0) {
+        if (elements.length > 1) {
             const first = elements[0];
             pContainer.innerHTML = '';
             pContainer.insertBefore(first, null);
+            setCount();
+        } else if(elements.length === 1){
+            pContainer.innerHTML = '';
             setCount();
         }
     });
