@@ -48,7 +48,7 @@ window.onload = async function () {
                     const text = array[i];
                     if(text.length > 0){
                         const node = document.createElement('p');
-                        if (text.indexOf('。') === -1) {
+                        if (text.substring(text.length - 1) !== '。') {
                             node.innerHTML = text + '。';
                         } else{
                             node.innerHTML = text;
