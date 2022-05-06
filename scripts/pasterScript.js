@@ -44,7 +44,7 @@ window.onload = async function () {
             if (elements.length - mCount > 0) {
                 const pasteNode = elements[elements.length - 1];
                 const array = pasteNode.innerHTML.split(/\r?\n/).filter(element => element);
-                for(const i in array){
+                for(const i in array.reverse()){
                     const text = array[i];
                     if(text.length > 0){
                         const node = document.createElement('p');
