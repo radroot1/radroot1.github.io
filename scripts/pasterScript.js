@@ -43,21 +43,21 @@ window.onload = async function () {
             const elements = pContainer.childNodes;
             if (elements.length - mCount > 0) {
                 const pasteNode = elements[elements.length - 1];
-
-
-                const array = pasteNode.innerHTML.split('\n');
+                const array = pasteNode.innerHTML.split(/\r?\n/).filter(element => element);
                 for(const i in array){
                     const text = array[i];
-                    const node = document.createElement('p');
-                    if (text.indexOf('。') === -1) {
-                        node.innerHTML = text + '。';
-                    } else{
-                        node.innerHTML = text;
+                    if(text.length > 0){
+                        const node = document.createElement('p');
+                        if (text.indexOf('。') === -1) {
+                            node.innerHTML = text + '。';
+                        } else{
+                            node.innerHTML = text;
+                        }
+                        moveToTop(node, pasteNode.parentNode);
                     }
-                    moveToTop(node, pasteNode.parentNode);
-                    setCount();
                 }
                 pasteNode.remove();
+                setCount();
             }
         })
     }
