@@ -42,12 +42,22 @@ window.onload = async function () {
         modifyWithoutClipListen(() => {
             const elements = pContainer.childNodes;
             if (elements.length - mCount > 0) {
-                const newEl = elements[elements.length - 1];
-                if (newEl.innerHTML.indexOf('。') === -1) {
-                    newEl.innerHTML = newEl.innerHTML + '。';
+                const pasteNode = elements[elements.length - 1];
+
+
+                const array = pasteNode.innerHTML.split('\n');
+                for(const i in array){
+                    const text = array[i];
+                    const node = document.createElement('p');
+                    if (text.indexOf('。') === -1) {
+                        node.innerHTML = text + '。';
+                    } else{
+                        node.innerHTML = text;
+                    }
+                    moveToTop(node, pasteNode.parentNode);
+                    setCount();
                 }
-                moveToTop(newEl, newEl.parentNode);
-                setCount();
+                pasteNode.remove();
             }
         })
     }

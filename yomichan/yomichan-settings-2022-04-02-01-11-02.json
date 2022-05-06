@@ -1,6 +1,6 @@
 {
     "version": 0,
-    "date": "2021-12-13 23:10:32",
+    "date": "2022-04-02 01:11:02",
     "url": "chrome-extension://ogmnaimimemjmbakcfefmnahgdfhfami/",
     "manifest": {
         "author": "Alex Yatskov",
@@ -76,23 +76,11 @@
                     "file://*/*"
                 ],
                 "run_at": "document_idle"
-            },
-            {
-                "all_frames": true,
-                "js": [
-                    "js/document-start.js"
-                ],
-                "match_about_blank": true,
-                "matches": [
-                    "http://docs.google.com/*",
-                    "https://docs.google.com/*"
-                ],
-                "run_at": "document_start"
             }
         ],
         "content_security_policy": "default-src 'self'; img-src blob: 'self'; style-src 'self' 'unsafe-inline'; media-src *; connect-src *",
         "description": "Japanese dictionary with Anki integration",
-        "differential_fingerprint": "1.81539742aef125232f43c4b827236a74c1149c73868fd07ee78ffe5f1731c320",
+        "differential_fingerprint": "1.71adb4c0e8da1908af89e6375c7005a1fd73759f2d096bcea76c629989c10f60",
         "icons": {
             "16": "images/icon16.png",
             "19": "images/icon19.png",
@@ -108,7 +96,8 @@
         "name": "Yomichan",
         "optional_permissions": [
             "clipboardRead",
-            "nativeMessaging"
+            "nativeMessaging",
+            "webNavigation"
         ],
         "options_ui": {
             "open_in_tab": true,
@@ -129,7 +118,7 @@
             ]
         },
         "update_url": "https://clients2.google.com/service/update2/crx",
-        "version": "21.10.31.1",
+        "version": "22.2.2.0",
         "web_accessible_resources": [
             "popup.html",
             "template-renderer.html"
@@ -141,7 +130,7 @@
             "os": "win"
         }
     },
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36",
     "permissions": {
         "origins": [
             "<all_urls>",
@@ -163,14 +152,14 @@
         ]
     },
     "options": {
-        "version": 15,
+        "version": 17,
         "profiles": [
             {
                 "name": "Default",
                 "conditionGroups": [],
                 "options": {
                     "general": {
-                        "enable": false,
+                        "enable": true,
                         "resultOutputMode": "split",
                         "debugInfo": false,
                         "maxResults": 32,
@@ -284,7 +273,8 @@
                         "enableOnPopupExpressions": false,
                         "enableOnSearchPage": true,
                         "enableSearchTags": false,
-                        "layoutAwareScan": false
+                        "layoutAwareScan": false,
+                        "matchTypePrefix": false
                     },
                     "translation": {
                         "convertHalfWidthCharacters": "false",
@@ -480,6 +470,34 @@
                             {
                                 "enabled": true,
                                 "character1": "…",
+                                "character2": null,
+                                "includeCharacterAtStart": false,
+                                "includeCharacterAtEnd": true
+                            },
+                            {
+                                "enabled": true,
+                                "character1": "︒",
+                                "character2": null,
+                                "includeCharacterAtStart": false,
+                                "includeCharacterAtEnd": true
+                            },
+                            {
+                                "enabled": true,
+                                "character1": "︕",
+                                "character2": null,
+                                "includeCharacterAtStart": false,
+                                "includeCharacterAtEnd": true
+                            },
+                            {
+                                "enabled": true,
+                                "character1": "︖",
+                                "character2": null,
+                                "includeCharacterAtStart": false,
+                                "includeCharacterAtEnd": true
+                            },
+                            {
+                                "enabled": true,
+                                "character1": "︙",
                                 "character2": null,
                                 "includeCharacterAtStart": false,
                                 "includeCharacterAtEnd": true
