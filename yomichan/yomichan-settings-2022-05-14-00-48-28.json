@@ -1,6 +1,6 @@
 {
     "version": 0,
-    "date": "2022-04-02 01:11:02",
+    "date": "2022-05-14 00:48:28",
     "url": "chrome-extension://ogmnaimimemjmbakcfefmnahgdfhfami/",
     "manifest": {
         "author": "Alex Yatskov",
@@ -55,6 +55,7 @@
                     "js/app/popup-factory.js",
                     "js/app/popup-proxy.js",
                     "js/app/popup-window.js",
+                    "js/app/theme-controller.js",
                     "js/comm/api.js",
                     "js/comm/cross-frame-api.js",
                     "js/comm/frame-ancestry-handler.js",
@@ -80,7 +81,7 @@
         ],
         "content_security_policy": "default-src 'self'; img-src blob: 'self'; style-src 'self' 'unsafe-inline'; media-src *; connect-src *",
         "description": "Japanese dictionary with Anki integration",
-        "differential_fingerprint": "1.71adb4c0e8da1908af89e6375c7005a1fd73759f2d096bcea76c629989c10f60",
+        "differential_fingerprint": "1.a877a2f133d468fa62405f4a91b6eb7e1833a3396582a9485a56cc1e3ce0b67c",
         "icons": {
             "16": "images/icon16.png",
             "19": "images/icon19.png",
@@ -118,7 +119,7 @@
             ]
         },
         "update_url": "https://clients2.google.com/service/update2/crx",
-        "version": "22.2.2.0",
+        "version": "22.4.4.0",
         "web_accessible_resources": [
             "popup.html",
             "template-renderer.html"
@@ -130,7 +131,7 @@
             "os": "win"
         }
     },
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36",
     "permissions": {
         "origins": [
             "<all_urls>",
@@ -152,7 +153,7 @@
         ]
     },
     "options": {
-        "version": 17,
+        "version": 18,
         "profiles": [
             {
                 "name": "Default",
@@ -180,7 +181,7 @@
                         "compactTags": true,
                         "mainDictionary": "JMdict (English)",
                         "popupTheme": "dark",
-                        "popupOuterTheme": "default",
+                        "popupOuterTheme": "light",
                         "customPopupCss": "",
                         "customPopupOuterCss": "",
                         "enableWanakana": true,
@@ -274,7 +275,9 @@
                         "enableOnSearchPage": true,
                         "enableSearchTags": false,
                         "layoutAwareScan": false,
-                        "matchTypePrefix": false
+                        "matchTypePrefix": false,
+                        "hidePopupOnCursorExit": false,
+                        "hidePopupOnCursorExitDelay": 0
                     },
                     "translation": {
                         "convertHalfWidthCharacters": "false",
@@ -350,7 +353,7 @@
                             "quality": 92
                         },
                         "terms": {
-                            "deck": "#jap::card",
+                            "deck": "#jap_card::card",
                             "model": "jap.words",
                             "fields": {
                                 "key_word": "{expression}",
@@ -369,7 +372,7 @@
                             }
                         },
                         "kanji": {
-                            "deck": "#jap::kanji.a",
+                            "deck": "#jap_kanji::kanji.a",
                             "model": "jap.kanji",
                             "fields": {
                                 "sym": "{character}",
