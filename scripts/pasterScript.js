@@ -8,20 +8,6 @@ window.onload = async function () {
         pCounter.innerHTML = count.toLocaleString() + ' / ' + charLength.toLocaleString();
         mCount = count;
     }
-    function wrapIn(el) {
-        const wrapper = document.createElement('p');
-        if(typeof el == "string"){
-            wrapper.textContent = el;
-        } else{
-            wrapper.appendChild(el);
-        }
-        return wrapper;
-    }
-    function wrapInAndAppendToTop(el) {
-        const wrapper = wrapIn(el);
-        moveToTop(wrapper, el.parentNode);
-        return wrapper;
-    }
     function moveToTop(el, parent) {
         parent.insertBefore(el, parent.childNodes[0]);
     }
@@ -38,6 +24,31 @@ window.onload = async function () {
         setTimeout(callback, 0);
         doListenForClipChanges(true);
     }
+    function getNode(text) {
+        const containsJapanese = text.match(/[\u3000-\u303f\u3040-\u309f\u30a0-\u30ff\uff00-\uff9f\u4e00-\u9faf\u3400-\u4dbf]/);
+
+        if(containsJapanese){
+            const node = document.createElement('p');
+            if (text.substring(text.length - 1) !== '。') {
+                node.innerHTML = text + '。';
+            } else{
+                node.innerHTML = text;
+            }
+            return node;
+        }
+
+        if (text.includes("http")) {
+            const node = document.createElement('a');
+            node.href = text;
+            node.innerHTML = text;
+            return node
+        }
+
+        const node = document.createElement('p');
+        node.innerHTML = text;
+
+        return node
+    }
     function clipListener() {
         modifyWithoutClipListen(() => {
             const elements = pContainer.childNodes;
@@ -47,13 +58,7 @@ window.onload = async function () {
                 for(const i in array.reverse()){
                     const text = array[i];
                     if(text.length > 0){
-                        const node = document.createElement('p');
-                        if (text.substring(text.length - 1) !== '。') {
-                            node.innerHTML = text + '。';
-                        } else{
-                            node.innerHTML = text;
-                        }
-                        moveToTop(node, pasteNode.parentNode);
+                        moveToTop(getNode(text), pasteNode.parentNode);
                     }
                 }
                 pasteNode.remove();
@@ -63,7 +68,7 @@ window.onload = async function () {
     }
     async function pasteClip() {
         const text = await navigator.clipboard.readText();
-        pContainer.appendChild(wrapIn(text))
+        pContainer.appendChild(getNode(text))
     }
 
     doListenForClipChanges(true);
