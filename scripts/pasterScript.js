@@ -24,30 +24,34 @@ window.onload = async function () {
         setTimeout(callback, 0);
         doListenForClipChanges(true);
     }
+    function wrapIn(el) {
+        const wrapper = document.createElement('p');
+        if(typeof el == "string"){
+            wrapper.textContent = el;
+        } else{
+            wrapper.appendChild(el);
+        }
+        return wrapper;
+    }
     function getNode(text) {
         const containsJapanese = text.match(/[\u3000-\u303f\u3040-\u309f\u30a0-\u30ff\uff00-\uff9f\u4e00-\u9faf\u3400-\u4dbf]/);
 
         if(containsJapanese){
-            const node = document.createElement('p');
             if (text.substring(text.length - 1) !== '。') {
-                node.innerHTML = text + '。';
-            } else{
-                node.innerHTML = text;
+                text = text + '。';
             }
-            return node;
+
+            return wrapIn(text);
         }
 
         if (text.includes("http")) {
             const node = document.createElement('a');
             node.href = text;
             node.innerHTML = text;
-            return node
+            return wrapIn(node)
         }
 
-        const node = document.createElement('p');
-        node.innerHTML = text;
-
-        return node
+        return wrapIn(text)
     }
     function clipListener() {
         modifyWithoutClipListen(() => {
