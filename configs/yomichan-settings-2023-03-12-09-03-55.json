@@ -1,6 +1,6 @@
 {
     "version": 0,
-    "date": "2022-05-14 00:48:28",
+    "date": "2023-03-12 09:03:55",
     "url": "chrome-extension://ogmnaimimemjmbakcfefmnahgdfhfami/",
     "manifest": {
         "author": "Alex Yatskov",
@@ -61,6 +61,7 @@
                     "js/comm/frame-ancestry-handler.js",
                     "js/comm/frame-client.js",
                     "js/comm/frame-offset-forwarder.js",
+                    "js/data/sandbox/string-util.js",
                     "js/dom/dom-text-scanner.js",
                     "js/dom/document-util.js",
                     "js/dom/text-source-element.js",
@@ -81,7 +82,7 @@
         ],
         "content_security_policy": "default-src 'self'; img-src blob: 'self'; style-src 'self' 'unsafe-inline'; media-src *; connect-src *",
         "description": "Japanese dictionary with Anki integration",
-        "differential_fingerprint": "1.a877a2f133d468fa62405f4a91b6eb7e1833a3396582a9485a56cc1e3ce0b67c",
+        "differential_fingerprint": "1.538e2c16740cf33c6fddf6bac8cc491de18de85a8122a5a4b52cea444343b7e2",
         "icons": {
             "16": "images/icon16.png",
             "19": "images/icon19.png",
@@ -119,7 +120,7 @@
             ]
         },
         "update_url": "https://clients2.google.com/service/update2/crx",
-        "version": "22.4.4.0",
+        "version": "22.10.23.0",
         "web_accessible_resources": [
             "popup.html",
             "template-renderer.html"
@@ -131,21 +132,17 @@
             "os": "win"
         }
     },
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36",
     "permissions": {
         "origins": [
             "<all_urls>",
             "chrome://favicon/*",
             "file:///*",
             "http://*/*",
-            "http://docs.google.com/*",
-            "https://*/*",
-            "https://docs.google.com/*"
+            "https://*/*"
         ],
         "permissions": [
-            "clipboardRead",
             "clipboardWrite",
-            "nativeMessaging",
             "storage",
             "unlimitedStorage",
             "webRequest",
@@ -153,7 +150,7 @@
         ]
     },
     "options": {
-        "version": 18,
+        "version": 20,
         "profiles": [
             {
                 "name": "Default",
@@ -231,7 +228,12 @@
                                     "scanOnPenHover": true,
                                     "scanOnPenPress": true,
                                     "scanOnPenRelease": false,
-                                    "preventTouchScrolling": true
+                                    "preventTouchScrolling": true,
+                                    "scanOnPenMove": true,
+                                    "scanOnPenReleaseHover": false,
+                                    "scanOnTouchPress": true,
+                                    "scanOnTouchRelease": false,
+                                    "preventPenScrolling": true
                                 }
                             },
                             {
@@ -250,7 +252,12 @@
                                     "scanOnPenHover": true,
                                     "scanOnPenPress": true,
                                     "scanOnPenRelease": false,
-                                    "preventTouchScrolling": true
+                                    "preventTouchScrolling": true,
+                                    "scanOnPenMove": true,
+                                    "scanOnPenReleaseHover": false,
+                                    "scanOnTouchPress": true,
+                                    "scanOnTouchRelease": false,
+                                    "preventPenScrolling": true
                                 }
                             }
                         ],
@@ -277,7 +284,8 @@
                         "layoutAwareScan": false,
                         "matchTypePrefix": false,
                         "hidePopupOnCursorExit": false,
-                        "hidePopupOnCursorExitDelay": 0
+                        "hidePopupOnCursorExitDelay": 0,
+                        "normalizeCssZoom": true
                     },
                     "translation": {
                         "convertHalfWidthCharacters": "false",
@@ -308,13 +316,6 @@
                         },
                         {
                             "name": "JMnedict",
-                            "priority": 0,
-                            "enabled": true,
-                            "allowSecondarySearches": false,
-                            "definitionsCollapsible": "not-collapsible"
-                        },
-                        {
-                            "name": "KireiCake",
                             "priority": 0,
                             "enabled": true,
                             "allowSecondarySearches": false,
@@ -361,14 +362,14 @@
                                 "read2": "",
                                 "def": "{reading}, {glossary-brief}",
                                 "mean1": "",
-                                "sym_legacy": "",
+                                "audio1": "",
                                 "notes": "",
                                 "read3": "",
                                 "read4": "",
                                 "read5": "",
-                                "read.empty": "",
                                 "sym1": "",
-                                "sym2": ""
+                                "sym2": "",
+                                "sym3": ""
                             }
                         },
                         "kanji": {
@@ -388,7 +389,10 @@
                         "checkForDuplicates": true,
                         "suspendNewCards": false,
                         "displayTags": "never",
-                        "duplicateScopeCheckAllModels": false
+                        "duplicateScopeCheckAllModels": false,
+                        "noteGuiMode": "browse",
+                        "apiKey": "",
+                        "downloadTimeout": 0
                     },
                     "sentenceParsing": {
                         "scanExtent": 200,
