@@ -58,13 +58,14 @@ window.onload = async function () {
             const elements = pContainer.childNodes;
             if (elements.length - mCount > 0) {
                 const pasteNode = elements[elements.length - 1];
-                const array = pasteNode.innerHTML.split(/\r?\n/).filter(element => element);
-                for(const i in array.reverse()){
-                    const text = array[i];
-                    if(text.length > 0){
-                        moveToTop(getNode(text), pasteNode.parentNode);
-                    }
-                }
+                // const array = pasteNode.innerHTML.split(/\r?\n/).filter(element => element);
+                // for(const i in array.reverse()){
+                //     const text = array[i];
+                //     if(text.length > 0){
+                //         moveToTop(getNode(text), pasteNode.parentNode);
+                //     }
+                // }
+                moveToTop(getNode(pasteNode.innerHTML), pasteNode.parentNode);
                 pasteNode.remove();
                 setCount();
             }
