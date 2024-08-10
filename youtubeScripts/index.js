@@ -25,8 +25,9 @@
             var r = confirm("Press a button!");
             console.log({e});
             if (r === true) {
-                doRequestPlaylist(key, playlistId, [formAddAllAction("WL")]);
-                clearPlaylist("WL");
+                doRequestPlaylist(key, playlistId, [formAddAllAction("WL")], function (){
+                    clearPlaylist("WL");
+                });
             }
         }
     });
@@ -77,7 +78,7 @@
         return found ? found[1] : null;
     }
 
-    function doRequestPlaylist(key, to, actions) {
+    function doRequestPlaylist(key, to, actions, onSuccess = null) {
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "/youtubei/v1/browse/edit_playlist?key=" + key, true);
         xhr.setRequestHeader("Content-Type", "application/json");
@@ -87,6 +88,11 @@
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 console.log("success", xhr.responseText);
+
+                if(onSuccess!=null){
+                    onSuccess();
+                }
+                
             }
         };
 
