@@ -12,9 +12,9 @@
 (function () {
     'use strict';
 
-    var key = "AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8";
-    var sApiId = "RDXcUeV1NUjTkAh-/A7DQoQMJgfiGhsWNL";
-    var playlistId = "example:PLhToONtKITIVY2kN0A2f4gSCDwihaNizb";
+    var key = "AIzaSyD9Spm7wEzwym3BsACbteaLn8GcIETfzHw";
+    var sApiId = "GXo9dY3yVSrwm9dZ/AzKD7tLHiBr1eYkIz";
+    var playlistId = "PLhToONtKITIVCrUt9qTVVDabQ80TcOtYa";
     //todo get key cookie
 
     console.log('start')
@@ -41,10 +41,9 @@
 
     function clearPlaylist(from) {
         var actions = [];
-        var videoItems = document.querySelectorAll("#pl-load-more-destination tr.pl-video");
-
+        var videoItems = document.querySelectorAll("#video-title");
         videoItems.forEach(function (item) {
-            var id = item.getAttribute("data-video-id");
+            var id = new URL(item.href).searchParams.get('v');
             actions.push(formClearAction(id));
         });
 
