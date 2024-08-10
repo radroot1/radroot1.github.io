@@ -6,22 +6,22 @@
 // @author       You
 // @match        https://www.youtube.com/playlist?list=*
 // @grant        none
-// @require https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js
 
 // ==/UserScript==
 
 (function () {
     'use strict';
-    const $ = window.jQuery;
+
     var key = "AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8";
     var sApiId = "RDXcUeV1NUjTkAh-/A7DQoQMJgfiGhsWNL";
     var playlistId = "example:PLhToONtKITIVY2kN0A2f4gSCDwihaNizb";
     //todo get key cookie
-    $("body").on("keydown", function (e) {
+
+    document.body.addEventListener("keydown", function (e) {
         if (e.shiftKey && e.which == 32) {
             var r = confirm("Press a button!");
             console.log({r});
-            if (r == true) {
+            if (r === true) {
                 doRequestPlaylist(key, playlistId, [formAddAllAction("WL")]);
                 clearPlaylist("WL");
             }
@@ -37,12 +37,13 @@
 
     function clearPlaylist(from) {
         var actions = [];
-        $("#pl-load-more-destination tr.pl-video")
-            .each(function (i, item) {
-                    var id = $(item).data("video-id");
-                    actions.push(formClearAction(id));
-                }
-            );
+        var videoItems = document.querySelectorAll("#pl-load-more-destination tr.pl-video");
+
+        videoItems.forEach(function (item) {
+            var id = item.getAttribute("data-video-id");
+            actions.push(formClearAction(id));
+        });
+
         doRequestPlaylist(key, from, actions);
     }
 
@@ -64,54 +65,53 @@
         return {
             "action": "ACTION_ADD_PLAYLIST",
             "addedFullListId": from
-        }
+        };
     }
 
     function getIdFromLink(link) {
         const regex = /.*watch\?v=(.*?)&(.*)/;
         const found = link.match(regex);
-        return found[1]
+        return found ? found[1] : null;
     }
 
     function doRequestPlaylist(key, to, actions) {
-        $(document).ready(function () {
-            $.ajax({
-                method: "POST",
-                contentType: 'application/json',
-                crossDomain: true,
-                headers: {
-                    "Authorization": formSAPISIDHASH(),
-                    "x-origin": "https://www.youtube.com"
-                },
-                url: "/youtubei/v1/browse/edit_playlist?key=" + key,
-                data: JSON.stringify({
-                    "context": {
-                        "client": {
-                            "hl": "en",
-                            "gl": "US",
-                            "visitorData": "CgtPQ3JGTHNpZ2J5YyjWx5D1BQ%3D%3D",
-                            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36,gzip(gfe)",
-                            "clientName": "WEB",
-                            "clientVersion": "2.20200424.06.00",
-                            "osName": "Windows",
-                            "osVersion": "10.0",
-                            "browserName": "Chrome",
-                            "browserVersion": "81.0.4044.122",
-                            "screenWidthPoints": 1085,
-                            "screenHeightPoints": 1322,
-                            "screenPixelDensity": 2,
-                            "utcOffsetMinutes": 240,
-                            "userInterfaceTheme": "USER_INTERFACE_THEME_DARK"
-                        },
-                    },
-                    "actions": actions,
-                    "playlistId": to
-                }),
-                success: function (result) {
-                    console.log("success", result)
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/youtubei/v1/browse/edit_playlist?key=" + key, true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.setRequestHeader("Authorization", formSAPISIDHASH());
+        xhr.setRequestHeader("x-origin", "https://www.youtube.com");
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                console.log("success", xhr.responseText);
+            }
+        };
+
+        var data = JSON.stringify({
+            "context": {
+                "client": {
+                    "hl": "en",
+                    "gl": "US",
+                    "visitorData": "CgtPQ3JGTHNpZ2J5YyjWx5D1BQ%3D%3D",
+                    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36,gzip(gfe)",
+                    "clientName": "WEB",
+                    "clientVersion": "2.20200424.06.00",
+                    "osName": "Windows",
+                    "osVersion": "10.0",
+                    "browserName": "Chrome",
+                    "browserVersion": "81.0.4044.122",
+                    "screenWidthPoints": 1085,
+                    "screenHeightPoints": 1322,
+                    "screenPixelDensity": 2,
+                    "utcOffsetMinutes": 240,
+                    "userInterfaceTheme": "USER_INTERFACE_THEME_DARK"
                 }
-            });
+            },
+            "actions": actions,
+            "playlistId": to
         });
+
+        xhr.send(data);
     }
 
     function formSAPISIDHASH() {
@@ -119,7 +119,7 @@
     }
 
     function _formSAPISIDHASH(sapisid, origin, date) {
-        return "SAPISIDHASH " + date + "_" + SHA1(date + " " + sapisid + " " + origin)
+        return "SAPISIDHASH " + date + "_" + SHA1(date + " " + sapisid + " " + origin);
     }
 
     function SHA1(msg) {
