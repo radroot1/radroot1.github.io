@@ -1,6 +1,6 @@
 {
-  "_timestamp": 1683527832984,
-  "_version": "3.45.0-chrome",
+  "_timestamp": 1687439365016,
+  "_version": "3.49.0-chrome",
   "actionIndicatorActionSeek": false,
   "actionIndicatorActionSeekBasedOnPlaybackRate": false,
   "actionIndicatorIconHidden": false,
@@ -62,11 +62,12 @@
   "cleanSiteWatchTitleHashtag": true,
   "commentsInSidebar": false,
   "commentsInSidebarDisableMainComments": false,
+  "commentsInSidebarPermanent": false,
   "commentsInputFocusAndPaste": false,
   "commentsInputTimeCorrection": 0,
   "commentsSectionHidden": false,
   "commentsSortBy": false,
-  "contentFilters": false,
+  "contentFilters": true,
   "contentFiltersLiveHomePage": true,
   "contentFiltersLiveRelatedVideos": true,
   "contentFiltersLiveSubscriptionsPage": true,
@@ -80,18 +81,20 @@
   "contentFiltersUpcomingSubscriptionsPage": true,
   "convertChannelNameToURL": true,
   "copyVideoURLDomain": "short",
-  "copyVideoURLExcludePlaylist": false,
+  "copyVideoURLExcludePlaylist": true,
   "copyVideoURLTime": "s",
   "customCSS": true,
-  "customCSSCode": ".ytp-bezel-text-wrapper{\ndisplay:none!important;\n}",
+  "customCSSCode": ".ytp-bezel-text-wrapper{\n//display:none!important;\n}",
   "customJS": true,
   "customJSCode": "",
   "cvfIncludeSubtitles": false,
   "cvfQuality": 0.92,
   "cvfType": "JPEG",
   "downloadButton": false,
+  "downloadButtonBackgroundMode": "site",
   "downloadButtonKey1Url": "",
   "downloadButtonKey2Url": "",
+  "downloadButtonKey3Url": "",
   "embedModeWindow": "current",
   "extensionOptionsPageLayout": "vertical",
   "extensionShortcutsAdjustPlaybackRateByValue": 0.25,
@@ -876,6 +879,22 @@
     {
       "action": "toggleSubtitles",
       "key": "87:w"
+    },
+    {
+      "action": "save",
+      "key": "71:g"
+    },
+    {
+      "action": "toggleZenMode",
+      "key": "81:q"
+    },
+    {
+      "action": "toggleVideoDimmer",
+      "key": null
+    },
+    {
+      "action": "toggleTheatreMode",
+      "key": null
     }
   ],
   "maxMouseControlArea": false,
@@ -899,6 +918,11 @@
   "preventAutoPause": false,
   "removeCustomMainScrollbar": false,
   "replayOnPreviousChapter": false,
+  "richGridView": false,
+  "richGridViewDecreasedContainerWidth": true,
+  "richGridViewDecreasedFontSize": true,
+  "richGridViewHiddenAvatars": true,
+  "richGridViewItemsPerRow": 6,
   "scrollbarThin": false,
   "searchBoxStyles": false,
   "searchPlaylistPage": false,
@@ -909,6 +933,8 @@
   "shortsLoop": false,
   "shortsOpenInNormalPlayer": false,
   "shortsPlayerOverlay": false,
+  "sidebarOverlaid": false,
+  "sidebarOverlaidSingleScrollbar": false,
   "sidebarPanelsMaxHeight": false,
   "sidebarRelatedHidden": false,
   "sidebarSectionFixed": false,
@@ -951,6 +977,7 @@
   "videoDescription": false,
   "videoDescriptionExactDate": false,
   "videoDescriptionExactViewCount": false,
+  "videoDescriptionInSidebar": false,
   "videoDimmer": false,
   "videoDimmerBrightness": 0.5,
   "videoDownloadLinkMode": "copy",
@@ -1000,8 +1027,8 @@
   "ytpTimeBasedOnPlaybackRate": false,
   "ytpTimeDisplayCustom": false,
   "ytpTimeDisplayCustomTemplate": "",
-  "zenMode": false,
-  "zenModeStylesBlur": 4,
+  "zenMode": true,
+  "zenModeStylesBlur": "4",
   "zenModeStylesGrayscale": 0,
-  "zenModeStylesOpacity": 16
+  "zenModeStylesOpacity": "0"
 }

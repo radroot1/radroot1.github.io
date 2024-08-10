@@ -15,13 +15,14 @@
     const $ = window.jQuery;
     var key = "AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8";
     var sApiId = "RDXcUeV1NUjTkAh-/A7DQoQMJgfiGhsWNL";
+    var playlistId = "example:PLhToONtKITIVY2kN0A2f4gSCDwihaNizb";
     //todo get key cookie
     $("body").on("keydown", function(e){
         if(e.shiftKey && e.which == 32) {
             var r = confirm("Press a button!");
             console.log({r});
             if (r == true) {
-                //doRequestPlaylist(key, "PLhToONtKITIVY2kN0A2f4gSCDwihaNizb", [formAddAllAction( "WL")]);
+                doRequestPlaylist(key, playlistId, [formAddAllAction( "WL")]);
                 clearPlaylist("WL");
             }
         }
