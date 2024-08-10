@@ -17,10 +17,13 @@
     var playlistId = "example:PLhToONtKITIVY2kN0A2f4gSCDwihaNizb";
     //todo get key cookie
 
+    console.log('start')
+
     document.body.addEventListener("keydown", function (e) {
+        console.log('pressed', {e})
         if (e.shiftKey && e.which == 32) {
             var r = confirm("Press a button!");
-            console.log({r});
+            console.log({e});
             if (r === true) {
                 doRequestPlaylist(key, playlistId, [formAddAllAction("WL")]);
                 clearPlaylist("WL");
