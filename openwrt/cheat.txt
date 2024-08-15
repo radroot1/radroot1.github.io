@@ -1,0 +1,37 @@
+https://habr.com/ru/articles/833564/
+
+ssh root@192.168.1.1
+
+opkg update
+opkg install iptables
+mkdir git; cd git; curl -sL https://github.com/bol-van/zapret/archive/master.tar.gz | tar xz
+cd zapret-master; ./install_bin.sh
+vi /etc/init.d//S51tpws
+
+
+opkg install kmod-ipt-nat;
+opkg install kmod-nf-nat;
+opkg install kmod-ipt-redirect;
+
+modprobe xt_REDIRECT;
+modprobe nf_nat;
+
+lsmod | grep -E 'xt_REDIRECT|nf_nat';
+
+
+curl https://speedtest.selectel.ru/100MB -o/dev/null
+curl --connect-to ::speedtest.selectel.ru https://manifest.googlevideo.com/100MB -k -o/dev/null
+
+chmod +x /etc/init.d/S51tpws
+/etc/init.d/S51tpws start
+
+
+Если настройки IP и DNS получаются автоматически от провайдера, в /etc/config/network
+найдите секцию интерфейса 'wan' и сделайте так :
+
+config interface 'wan'
+	.............
+	option peerdns '0'
+
+/etc/init.d/network restart
+/etc/init.d/dnsmasq restart

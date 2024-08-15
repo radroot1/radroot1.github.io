@@ -1,0 +1,67 @@
+#!/bin/sh
+
+SCRIPT=/root/git/zapret-master/tpws/tpws
+PIDFILE=/var/run/tpws.pid
+PORT=999
+ARGS2="--bind-addr 192.168.1.1 --port $PORT --disorder --tlsrec=sni --pidfile $PIDFILE"
+ARGS="--bind-addr 192.168.1.1 --port $PORT --disorder --tlsrec=sni --split-pos=2 --hostlist=/root/git/list.txt --pidfile $PIDFILE"
+INTERFACE=br-lan
+
+_start(){
+  if [ -f $PIDFILE ] && kill -0 $(cat $PIDFILE); then
+    echo 'Service TPWS is already running' >&2
+    return 1
+  fi
+  iptables -t nat -A PREROUTING -i $INTERFACE -p tcp --dport 80 -j REDIRECT --to-port $PORT
+  iptables -t nat -A PREROUTING -i $INTERFACE -p tcp --dport 443 -j REDIRECT --to-port $PORT
+  echo 'Started TPWS service'
+}
+start() {
+  _start
+  $SCRIPT $ARGS --daemon
+}
+debug() {
+  _start
+  $SCRIPT $ARGS --debug=2
+}
+
+
+stop() {
+  iptables -t nat -D PREROUTING -i $INTERFACE -p tcp --dport 80 -j REDIRECT --to-port $PORT
+  iptables -t nat -D PREROUTING -i $INTERFACE -p tcp --dport 443 -j REDIRECT --to-port $PORT
+  if [ ! -f "$PIDFILE" ] || ! kill -0 $(cat "$PIDFILE"); then
+    echo 'Service TPWS is not running' >&2
+    return 1
+  fi
+  echo 'Stopping TPWS service...'
+  kill -15 $(cat "$PIDFILE") && rm -f "$PIDFILE"
+}
+
+status() {
+  if [ -f $PIDFILE ] && kill -0 $(cat $PIDFILE); then
+    echo 'Service TPWS is running'
+  else
+    echo 'Service TPWS is stopped'
+  fi
+}
+
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  status)
+    status
+    ;;
+  restart)
+    stop
+    start
+    ;;
+  debug)
+    debug
+    ;;
+  *)
+    echo "Usage: $0 {start|stop|restart|status}"
+esac
