@@ -1,0 +1,32 @@
+-general- 
+xmp: profile 2
+cpu under voltage protection: off
+Enhanced Turbo: Disabled
+
+-cpu-
+Cpu Core Voltage Mode: (Adaptive + Offset Mode)
+Cpu Core Voltage Offset Mode: (-)
+Cpu Core Voltage Offset: (0.02)
+Long Duration Power Limit: (253w)
+Short Duration Power Limit: (253w)
+
+-var-
+Sata Device Support: Last boot hdd only
+Full Screen logo Display: Disabled
+Usb Support: Disabled
+Msi fast boot: Enabled
+Ps2 Devices Support: Disabled
+Vga Detection: Ignore
+
+-ratio (optional)-
+P-Core Ratio: 55
+E-core Ratio: 42
+Ring Ratio: 45
+Cpu core voltage: 1.4
+Cpu Loadline Calibration: Mode 7
+
+1. 253w-78max-0.05v
+2. 253w-0.1v-stable
+3. p55-e42-r45-loadline7
+5. 320w-89max-0.03v
+6. 330w-94max-0.02v
